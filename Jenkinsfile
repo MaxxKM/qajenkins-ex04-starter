@@ -5,13 +5,11 @@ pipeline {
     dockerImage = ""
   }
   stages {
-    stage ('Docker Build'){
-      steps{
-        script {
-            dockerImage = docker.build(registry)
-            dockerImage.tag("${env.BUILD_NUMBER}")
-            }
-        }
+    stage("Docker Build") {
+      script {
+        dockerImage = docker.build(registry)
+        dockerImage.tag("${env.BUILD_NUMBER}")
+      }
     }
     stage("Scan Image") {
       steps {
